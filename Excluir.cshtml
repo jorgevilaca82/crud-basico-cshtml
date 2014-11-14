@@ -1,0 +1,16 @@
+﻿@{
+var ID = Request.QueryString["ID"];
+
+var db = Database.Open("Sistema");
+
+int resultado = db.Execute(@"
+DELETE FROM PESSOA WHERE ID = @0
+", ID);
+
+if(resultado == 1){
+    Session["mensagem"] = "Registro excluído!";
+    Response.Redirect("Index");
+}
+
+}
+

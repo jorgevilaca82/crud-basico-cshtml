@@ -1,0 +1,37 @@
+﻿@{
+    var ID = Request.QueryString["ID"];
+    var db = Database.Open("Sistema");
+    var pessoa = db.QuerySingle("SELECT * FROM PESSOA WHERE ID = @0", ID);    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <p>
+            Nome: @pessoa.NOME
+        </p>
+        
+        <p>
+            CPF: @pessoa.CPF
+        </p>
+
+        <p>
+            Sexo: @pessoa.SEXO    
+        </p>
+
+        <p>
+            Telefone: @pessoa.TELEFONE
+        </p>
+
+        <p>
+            Data Nascimento: @pessoa.DT_NASC
+        </p>
+
+        <a href="editar?ID=@pessoa.ID">Editar</a>
+    </body>
+</html>

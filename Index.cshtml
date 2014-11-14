@@ -1,0 +1,52 @@
+﻿@{
+  var db = Database.Open("Sistema");
+  
+  var pessoas = db.Query("select * from PESSOA");    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+
+        @Session["mensagem"]
+        @{ Session.Remove("mensagem"); }
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Data Nasc.</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+        @foreach(var pessoa in pessoas)
+        {
+            <tr>
+                <td>@pessoa.ID</td>
+                <td>@pessoa.NOME</td>
+                <td>@pessoa.CPF</td>
+                <td>@pessoa.DT_NASC</td>
+                <td>
+                    <a href="detalhes?ID=@pessoa.ID">
+                        Ver Detalhes
+                    </a>
+
+                    <a href="excluir?ID=@pessoa.ID">
+                        Excluir
+                    </a>
+                </td>
+            </tr>   
+        }        
+        </table>
+        
+        <a href="Criar">Criar Registro</a>
+
+    </body>
+</html>

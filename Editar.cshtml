@@ -1,0 +1,41 @@
+﻿@{
+    var ID = Request.QueryString["ID"];
+    var db = Database.Open("Sistema");
+    var pessoa = 
+        db.QuerySingle(
+            "SELECT * FROM PESSOA WHERE ID = " + ID);    
+}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <form action="atualizar" method="post">
+            <input type="hidden" name="ID" value="@pessoa.ID" />
+        <p>
+            Nome: <input type="text" name="nome" value="@pessoa.NOME" />
+        </p>
+        
+        <p>
+            CPF: <input type="text" name="cpf" value="@pessoa.CPF" />
+        </p>
+
+        <p>
+            Sexo: <input type="text" name="sexo" value="@pessoa.SEXO" />  
+        </p>
+
+        <p>
+            Telefone: <input type="text" name="telefone" value="@pessoa.TELEFONE" />
+        </p>
+
+            <input type="submit" value="Enviar" />
+        
+        </form>
+
+    </body>
+</html>

@@ -1,0 +1,21 @@
+﻿@{
+  var NOME     = Request.Form["nome"];
+  var CPF      = Request.Form["cpf"];
+  var SEXO     = Request.Form["sexo"];
+  var TELEFONE = Request.Form["telefone"];
+
+  var db = Database.Open("Sistema");
+
+  int resultado = db.Execute(@"
+  INSERT INTO PESSOA (NOME, CPF, SEXO, TELEFONE)
+  VALUES (@0, @1, @2, @3)", NOME, CPF, SEXO, TELEFONE);
+
+  if(resultado == 1){
+      Session["mensagem"] = "Registro Inserido com sucesso!";
+      Response.Redirect("Index");
+      
+  }
+}
+
+
+
